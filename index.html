@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+html{scroll-behavior:smooth;}
 
 *{
 margin:0;
@@ -22,6 +23,34 @@ background:#0f172a;
 color:white;
 line-height:1.6;
 }
+
+/* Navigation bar */
+.navbar{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	background:rgba(15,23,42,0.95);
+	backdrop-filter:blur(6px);
+	z-index:1000;
+}
+.navbar .container{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	padding:10px 0;
+}
+.navbar .logo{
+	font-weight:700;
+	color:#38bdf8;
+	text-decoration:none;
+}
+.navbar .nav-links{display:flex;gap:18px;}
+.navbar a{color:#cbd5e1;text-decoration:none;padding:8px 10px;border-radius:6px;font-weight:600}
+.navbar a:hover{background:#0b1220;color:#38bdf8}
+
+/* offset page content so fixed nav doesn't cover it */
+body{padding-top:64px}
 
 .container{
 width:90%;
@@ -63,7 +92,7 @@ color:#38bdf8;
 }
 
 .about{
-max-width:750px;
+max-width:99%;
 }
 
 .skills{
@@ -127,7 +156,21 @@ color:#94a3b8;
 
 <body>
 
-<header class="container">
+<nav class="navbar" aria-label="Main navigation">
+	<div class="container">
+		<a class="logo" href="#home">Mirza Iyyaz Baig</a>
+		<div class="nav-links">
+			<a href="#home">Home</a>
+			<a href="#about">About</a>
+			<a href="#skills">Skills</a>
+			<a href="#projects">Projects</a>
+			<a href="#contact">Contact</a>
+			<a href="Mirza_Iyyaz_Baig_Resume.pdf">Resume</a>
+		</div>
+	</div>
+</nav>
+
+<header id="home" class="container">
 
 <img src="profile.jpg" class="profile-img">
 
@@ -147,7 +190,7 @@ color:#94a3b8;
 </header>
 
 
-<section class="container">
+<section id="about" class="container">
 
 <h2 class="section-title">About Me</h2>
 
@@ -162,7 +205,7 @@ I love learning new technologies, improving my coding skills, and building clean
 </section>
 
 
-<section class="container">
+<section id="skills" class="container">
 
 <h2 class="section-title">Skills</h2>
 
@@ -182,7 +225,7 @@ I love learning new technologies, improving my coding skills, and building clean
 </section>
 
 
-<section class="container">
+<section id="projects" class="container">
 
 <h2 class="section-title">Projects</h2>
 
@@ -218,7 +261,7 @@ I love learning new technologies, improving my coding skills, and building clean
 </section>
 
 
-<section class="container">
+<section id="contact" class="container">
 
 <h2 class="section-title">Contact</h2>
 
