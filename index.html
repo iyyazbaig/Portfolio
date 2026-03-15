@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -27,10 +28,34 @@ line-height:1.6;
 transition:0.3s;
 }
 
+/* LIGHT MODE */
+
 body.light{
 background:#f8fafc;
 color:#111;
 }
+
+/* ANIMATED BACKGROUND */
+
+#bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+background:linear-gradient(120deg,#0f172a,#020617,#0f172a);
+background-size:400% 400%;
+animation:gradientMove 12s infinite;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* CONTAINER */
 
 .container{
 width:90%;
@@ -44,7 +69,7 @@ margin:auto;
 position:fixed;
 top:0;
 width:100%;
-background:rgba(15,23,42,0.95);
+background:rgba(15,23,42,0.9);
 backdrop-filter:blur(6px);
 z-index:1000;
 }
@@ -84,22 +109,8 @@ color:#38bdf8;
 
 .menu-btn{
 display:none;
-font-size:22px;
+font-size:24px;
 cursor:pointer;
-}
-
-/* THEME BUTTON */
-
-#themeToggle{
-background:none;
-border:none;
-font-size:18px;
-cursor:pointer;
-color:white;
-}
-
-body.light #themeToggle{
-color:black;
 }
 
 /* HEADER */
@@ -117,6 +128,13 @@ border:4px solid #38bdf8;
 object-fit:cover;
 margin-bottom:15px;
 }
+.logo-img{
+width:35px;
+height:35px;
+border-radius: 50%;
+border:1px solid #38bdf8;
+object-fit:cover;
+}
 
 h1{
 font-size:36px;
@@ -125,62 +143,7 @@ font-size:36px;
 .subtitle{
 color:#38bdf8;
 margin-top:5px;
-}
-
-/* SECTIONS */
-
-section{
-padding:60px 0;
-opacity:0;
-transform:translateY(40px);
-transition:all 0.6s ease;
-}
-
-.section-title{
-font-size:28px;
-margin-bottom:20px;
-color:#38bdf8;
-}
-
-/* SKILLS */
-
-.skills{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
-}
-
-.skill{
-background:#1e293b;
-padding:15px;
-border-radius:8px;
-}
-
-body.light .skill{
-background:#e2e8f0;
-}
-
-/* PROJECTS */
-
-.projects{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-
-.project-card{
-background:#1e293b;
-padding:20px;
-border-radius:10px;
-}
-
-body.light .project-card{
-background:#e2e8f0;
-}
-
-.project-card h3{
-margin-bottom:10px;
-color:#38bdf8;
+font-weight:600;
 }
 
 /* SOCIAL */
@@ -206,6 +169,69 @@ color:black;
 border-radius:6px;
 text-decoration:none;
 font-weight:bold;
+}
+
+/* SECTION */
+
+section{
+padding:60px 0;
+opacity:0;
+transform:translateY(40px);
+transition:all 0.6s ease;
+}
+
+.section-title{
+font-size:28px;
+margin-bottom:20px;
+color:#38bdf8;
+}
+
+/* SKILLS */
+
+.skill{
+margin-bottom:20px;
+}
+
+.bar{
+height:10px;
+background:#1e293b;
+border-radius:10px;
+overflow:hidden;
+}
+
+.progress{
+height:10px;
+background:#38bdf8;
+width:0;
+}
+
+.java{width:90%}
+.python{width:70%}
+.js{width:90%}
+.html{width:99%}
+.css{width:99%}
+.bootstrap{width:95%}
+.angular{width:95%}
+.mysql{width:90%}
+
+/* PROJECTS */
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+.project-card{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+transition:0.4s;
+}
+
+.project-card:hover{
+transform:rotateY(8deg) rotateX(6deg) scale(1.05);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 
 /* CONTACT */
@@ -268,14 +294,15 @@ display:block;
 
 </head>
 
-
 <body>
+
+<div id="bg"></div>
 
 <nav class="navbar">
 
 <div class="container">
 
-<a class="logo" href="#home">Iyyaz Baig</a>
+<a class="logo" href="#"><img src="profile.jpg"  class="logo-img" alt="Mirza Iyyaz Baig"></a>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
@@ -285,14 +312,11 @@ display:block;
 <a href="#skills">Skills</a>
 <a href="#projects">Projects</a>
 <a href="#contact">Contact</a>
-<a href="Mirza_Iyyaz_Baig_Resume.pdf">Resume</a>
-<button id="themeToggle">🌙</button>
 </div>
 
 </div>
 
 </nav>
-
 
 <header id="home" class="container">
 
@@ -300,7 +324,7 @@ display:block;
 
 <h1>Mirza Iyyaz Baig</h1>
 
-<p class="subtitle">Full Stack Developer</p>
+<p class="subtitle"><span id="typing"></span></p>
 
 <div class="social">
 <a href="https://github.com/iyyazbaig">GitHub</a>
@@ -313,44 +337,67 @@ display:block;
 
 </header>
 
-
 <section id="about" class="container">
 
 <h2 class="section-title">About Me</h2>
 
 <p>
 
-Hello! I'm Mirza Iyyaz Baig, a passionate Full Stack Developer with a Bachelor of Computer Applications (BCA).  
-I enjoy building modern, responsive web applications that solve real-world problems.
+Hello! I'm Mirza Iyyaz Baig, a passionate Full Stack Developer with a Bachelor of Computer Applications (BCA).
 
-My core expertise includes Java, JavaScript, Angular, Python, and MySQL. I have developed several full-stack projects including an AI-Enabled E-Governance Portal, Event Booking Platform, and Student Management System.
+I enjoy building modern web applications using Java, Angular, JavaScript, Python and MySQL. I have developed multiple full-stack applications including event management systems, e-governance portals and browser games.
 
-I love learning new technologies, improving my coding skills, and building clean, scalable applications. I am currently seeking an entry-level opportunity where I can contribute, learn from experienced developers, and grow as a professional software developer.
+I am passionate about learning new technologies, writing clean code, and building scalable software solutions.
 
 </p>
 
 </section>
 
-
 <section id="skills" class="container">
 
 <h2 class="section-title">Skills</h2>
 
-<div class="skills">
+<div class="skill">
+Java
+<div class="bar"><div class="progress java"></div></div>
+</div>
 
-<div class="skill">Java – Expert</div>
-<div class="skill">Python – Intermediate</div>
-<div class="skill">JavaScript – Expert</div>
-<div class="skill">HTML5 – Expert</div>
-<div class="skill">CSS3 – Expert</div>
-<div class="skill">Bootstrap – Expert</div>
-<div class="skill">Angular – Expert</div>
-<div class="skill">MySQL – Expert</div>
+<div class="skill">
+Python
+<div class="bar"><div class="progress python"></div></div>
+</div>
 
+<div class="skill">
+JavaScript
+<div class="bar"><div class="progress js"></div></div>
+</div>
+
+<div class="skill">
+HTML5
+<div class="bar"><div class="progress html"></div></div>
+</div>
+
+<div class="skill">
+CSS3
+<div class="bar"><div class="progress css"></div></div>
+</div>
+
+<div class="skill">
+Bootstrap
+<div class="bar"><div class="progress bootstrap"></div></div>
+</div>
+
+<div class="skill">
+Angular
+<div class="bar"><div class="progress angular"></div></div>
+</div>
+
+<div class="skill">
+MySQL
+<div class="bar"><div class="progress mysql"></div></div>
 </div>
 
 </section>
-
 
 <section id="projects" class="container">
 
@@ -360,16 +407,16 @@ I love learning new technologies, improving my coding skills, and building clean
 
 </section>
 
-
 <section id="contact" class="container">
 
 <h2 class="section-title">Contact</h2>
 
-<form action="https://formspree.io/f/xjkrgqya" method="POST">
+<form>
 
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="email" name="email" placeholder="Your Email" required>
-<textarea name="message" placeholder="Message"></textarea>
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Your Email">
+
+<textarea placeholder="Message"></textarea>
 
 <button type="submit">Send Message</button>
 
@@ -377,19 +424,11 @@ I love learning new technologies, improving my coding skills, and building clean
 
 </section>
 
-
 <footer>
 
 <p>Built with ❤️ by Mirza Iyyaz Baig</p>
 
-<p>
-<a href="https://github.com/iyyazbaig">GitHub</a> |
-<a href="https://linkedin.com/in/mirza-iyyaz-baig">LinkedIn</a> |
-<a href="mailto:iyyaz3313@gmail.com">Gmail</a>
-</p>
-
 </footer>
-
 
 <script>
 
@@ -399,13 +438,36 @@ function toggleMenu(){
 document.getElementById("navLinks").classList.toggle("active");
 }
 
-/* DARK MODE */
+/* TYPING EFFECT */
 
-const toggle=document.getElementById("themeToggle");
+const roles=[
+"Full Stack Developer",
+"Java & Angular Developer",
+"Frontend & Backend Engineer",
+"Problem Solver"
+];
 
-toggle.onclick=()=>{
-document.body.classList.toggle("light");
+let roleIndex=0;
+let charIndex=0;
+
+function type(){
+
+let currentRole=roles[roleIndex];
+let typing=document.getElementById("typing");
+
+typing.textContent=currentRole.substring(0,charIndex++);
+
+if(charIndex>currentRole.length){
+roleIndex=(roleIndex+1)%roles.length;
+charIndex=0;
+setTimeout(type,1000);
+}else{
+setTimeout(type,80);
 }
+
+}
+
+type();
 
 /* SCROLL ANIMATION */
 
@@ -420,6 +482,16 @@ entry.target.style.transform="translateY(0)";
 
 document.querySelectorAll("section").forEach(section=>{
 observer.observe(section);
+});
+
+/* SKILL BAR ANIMATION */
+
+window.addEventListener("scroll",()=>{
+
+document.querySelectorAll(".progress").forEach(bar=>{
+bar.style.transition="width 2s";
+});
+
 });
 
 /* LOAD GITHUB PROJECTS */
