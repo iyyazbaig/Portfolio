@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+
 html{scroll-behavior:smooth;}
 
 *{
@@ -22,35 +24,13 @@ body{
 background:#0f172a;
 color:white;
 line-height:1.6;
+transition:0.3s;
 }
 
-/* Navigation bar */
-.navbar{
-	position:fixed;
-	top:0;
-	left:0;
-	width:100%;
-	background:rgba(15,23,42,0.95);
-	backdrop-filter:blur(6px);
-	z-index:1000;
+body.light{
+background:#f8fafc;
+color:#111;
 }
-.navbar .container{
-	display:flex;
-	align-items:center;
-	justify-content:space-between;
-	padding:10px 0;
-}
-.navbar .logo{
-	font-weight:700;
-	color:#38bdf8;
-	text-decoration:none;
-}
-.navbar .nav-links{display:flex;gap:18px;}
-.navbar a{color:#cbd5e1;text-decoration:none;padding:8px 10px;border-radius:6px;font-weight:600}
-.navbar a:hover{background:#0b1220;color:#38bdf8}
-
-/* offset page content so fixed nav doesn't cover it */
-body{padding-top:64px}
 
 .container{
 width:90%;
@@ -58,9 +38,75 @@ max-width:1100px;
 margin:auto;
 }
 
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(15,23,42,0.95);
+backdrop-filter:blur(6px);
+z-index:1000;
+}
+
+.navbar .container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+}
+
+.logo{
+color:#38bdf8;
+font-weight:700;
+text-decoration:none;
+}
+
+.nav-links{
+display:flex;
+gap:18px;
+}
+
+.nav-links a{
+color:#cbd5e1;
+text-decoration:none;
+font-weight:600;
+padding:6px 10px;
+border-radius:6px;
+}
+
+.nav-links a:hover{
+background:#0b1220;
+color:#38bdf8;
+}
+
+/* MOBILE MENU */
+
+.menu-btn{
+display:none;
+font-size:22px;
+cursor:pointer;
+}
+
+/* THEME BUTTON */
+
+#themeToggle{
+background:none;
+border:none;
+font-size:18px;
+cursor:pointer;
+color:white;
+}
+
+body.light #themeToggle{
+color:black;
+}
+
+/* HEADER */
+
 header{
-padding:40px 0;
 text-align:center;
+padding:120px 0 60px 0;
 }
 
 .profile-img{
@@ -81,8 +127,13 @@ color:#38bdf8;
 margin-top:5px;
 }
 
+/* SECTIONS */
+
 section{
 padding:60px 0;
+opacity:0;
+transform:translateY(40px);
+transition:all 0.6s ease;
 }
 
 .section-title{
@@ -91,9 +142,7 @@ margin-bottom:20px;
 color:#38bdf8;
 }
 
-.about{
-max-width:99%;
-}
+/* SKILLS */
 
 .skills{
 display:grid;
@@ -107,6 +156,12 @@ padding:15px;
 border-radius:8px;
 }
 
+body.light .skill{
+background:#e2e8f0;
+}
+
+/* PROJECTS */
+
 .projects{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -119,20 +174,28 @@ padding:20px;
 border-radius:10px;
 }
 
+body.light .project-card{
+background:#e2e8f0;
+}
+
 .project-card h3{
 margin-bottom:10px;
 color:#38bdf8;
 }
 
+/* SOCIAL */
+
 .social{
-margin-top:20px;
+margin-top:15px;
 }
 
 .social a{
-margin-right:15px;
-text-decoration:none;
+margin-right:12px;
 color:#38bdf8;
+text-decoration:none;
 }
+
+/* RESUME BUTTON */
 
 .resume-btn{
 display:inline-block;
@@ -145,30 +208,91 @@ text-decoration:none;
 font-weight:bold;
 }
 
+/* CONTACT */
+
+form{
+display:flex;
+flex-direction:column;
+gap:10px;
+max-width:400px;
+}
+
+input,textarea{
+padding:10px;
+border-radius:6px;
+border:none;
+}
+
+button{
+background:#38bdf8;
+border:none;
+padding:10px;
+cursor:pointer;
+border-radius:6px;
+}
+
+/* FOOTER */
+
 footer{
 text-align:center;
 padding:30px 0;
 color:#94a3b8;
 }
 
+/* MOBILE */
+
+@media(max-width:768px){
+
+.nav-links{
+position:absolute;
+top:60px;
+left:0;
+width:100%;
+background:#0f172a;
+flex-direction:column;
+align-items:center;
+display:none;
+}
+
+.nav-links.active{
+display:flex;
+}
+
+.menu-btn{
+display:block;
+}
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<nav class="navbar" aria-label="Main navigation">
-	<div class="container">
-		<a class="logo" href="#home">Mirza Iyyaz Baig</a>
-		<div class="nav-links">
-			<a href="#home">Home</a>
-			<a href="#about">About</a>
-			<a href="#skills">Skills</a>
-			<a href="#projects">Projects</a>
-			<a href="#contact">Contact</a>
-			<a href="Mirza_Iyyaz_Baig_Resume.pdf">Resume</a>
-		</div>
-	</div>
+<nav class="navbar">
+
+<div class="container">
+
+<a class="logo" href="#home">Iyyaz Baig</a>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<div class="nav-links" id="navLinks">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+<a href="Mirza_Iyyaz_Baig_Resume.pdf">Resume</a>
+<button id="themeToggle">🌙</button>
+</div>
+
+</div>
+
 </nav>
+
 
 <header id="home" class="container">
 
@@ -194,12 +318,15 @@ color:#94a3b8;
 
 <h2 class="section-title">About Me</h2>
 
-<p class="about">
-Hello! I'm Mirza Iyyaz Baig, a passionate Full Stack Developer with a Bachelor of Computer Applications (BCA). I enjoy building modern, responsive web applications that solve real-world problems.
+<p>
+
+Hello! I'm Mirza Iyyaz Baig, a passionate Full Stack Developer with a Bachelor of Computer Applications (BCA).  
+I enjoy building modern, responsive web applications that solve real-world problems.
 
 My core expertise includes Java, JavaScript, Angular, Python, and MySQL. I have developed several full-stack projects including an AI-Enabled E-Governance Portal, Event Booking Platform, and Student Management System.
 
 I love learning new technologies, improving my coding skills, and building clean, scalable applications. I am currently seeking an entry-level opportunity where I can contribute, learn from experienced developers, and grow as a professional software developer.
+
 </p>
 
 </section>
@@ -229,34 +356,7 @@ I love learning new technologies, improving my coding skills, and building clean
 
 <h2 class="section-title">Projects</h2>
 
-<div class="projects">
-
-<div class="project-card">
-<h3>E-Governance Portal</h3>
-<p>Platform providing access to government schemes and services with intelligent recommendations.</p>
-</div>
-
-<div class="project-card">
-<h3>EventEase</h3>
-<p>Online event booking and management system with admin dashboard.</p>
-</div>
-
-<div class="project-card">
-<h3>Student Records System</h3>
-<p>Full stack student information management platform with CRUD operations.</p>
-</div>
-
-<div class="project-card">
-<h3>Bubble Blaze</h3>
-<p>Interactive browser based agility and number recognition game.</p>
-</div>
-
-<div class="project-card">
-<h3>TicTacX</h3>
-<p>Responsive two player Tic Tac Toe browser game.</p>
-</div>
-
-</div>
+<div id="projectsContainer" class="projects"></div>
 
 </section>
 
@@ -265,15 +365,90 @@ I love learning new technologies, improving my coding skills, and building clean
 
 <h2 class="section-title">Contact</h2>
 
-<p>Email: iyyaz3313@gmail.com</p>
+<form action="https://formspree.io/f/xjkrgqya" method="POST">
+
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Message"></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
 
 </section>
 
+
 <footer>
 
-<p>© 2025 Mirza Iyyaz Baig | Developer Portfolio</p>
+<p>Built with ❤️ by Mirza Iyyaz Baig</p>
+
+<p>
+<a href="https://github.com/iyyazbaig">GitHub</a> |
+<a href="https://linkedin.com/in/mirza-iyyaz-baig">LinkedIn</a> |
+<a href="mailto:iyyaz3313@gmail.com">Gmail</a>
+</p>
 
 </footer>
+
+
+<script>
+
+/* MOBILE MENU */
+
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("active");
+}
+
+/* DARK MODE */
+
+const toggle=document.getElementById("themeToggle");
+
+toggle.onclick=()=>{
+document.body.classList.toggle("light");
+}
+
+/* SCROLL ANIMATION */
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.style.opacity=1;
+entry.target.style.transform="translateY(0)";
+}
+});
+});
+
+document.querySelectorAll("section").forEach(section=>{
+observer.observe(section);
+});
+
+/* LOAD GITHUB PROJECTS */
+
+fetch("https://api.github.com/users/iyyazbaig/repos")
+.then(res=>res.json())
+.then(data=>{
+
+const container=document.getElementById("projectsContainer");
+
+data.slice(0,6).forEach(repo=>{
+
+const card=document.createElement("div");
+
+card.className="project-card";
+
+card.innerHTML=`
+<h3>${repo.name}</h3>
+<p>${repo.description || "GitHub project repository"}</p>
+<a href="${repo.html_url}" target="_blank">View Project</a>
+`;
+
+container.appendChild(card);
+
+});
+
+});
+
+</script>
 
 </body>
 </html>
